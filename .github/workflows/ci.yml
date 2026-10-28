@@ -34,13 +34,16 @@ jobs:
           --suppress=checkersReport \
           --suppress=missingIncludeSystem \
           --template=gcc
-    - name: Install Clang-tidy
-      run: sudo apt-get install -y --no-install-recommends clang-tidy
+    - name: Install clang-tidy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends clang-tidy
     - name: Clang-tidy
       run: |
         clang-tidy \
+          --quiet \
           --checks='-*,clang-analyzer-*,cert-*,portability-*,readability-*' \
-          cstack.c \
-          || true
+          -p build/Release \
+          cstack.c
     - name: Test
       run: ctest --test-dir build/Release --output-on-failure
