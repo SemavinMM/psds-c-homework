@@ -11,5 +11,6 @@ void
 stack_push(const hstack_t stack, const void* data_in, const unsigned int size);
 unsigned int
 stack_pop(const hstack_t stack, void* data_out, const unsigned int size);
+hstack_t stack_get_all(void);
 
 #endif /* CSTACK_H */
