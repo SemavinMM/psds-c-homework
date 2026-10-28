@@ -13,7 +13,8 @@ void stack_free(const hstack_t stack);
 /* Remove all existing stacks, if any. */
 void stack_free_all(void);
 
-/* Check handler validity; returns 0 if the stack exists, 1 otherwise. */
+/* Check handler validity. Note the inverted polarity: returns 0 if the
+ * stack exists (the handler is valid), 1 otherwise. */
 int stack_valid_handler(const hstack_t stack);
 
 /* Get the element count; returns 0 if the stack does not exist. */
