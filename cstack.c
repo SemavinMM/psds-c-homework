@@ -14,6 +14,8 @@ void stack_free(const hstack_t hstack)
     UNUSED(hstack);
 }
 
+void stack_free_all(void) {}
+
 int stack_valid_handler(const hstack_t hstack)
 {
     UNUSED(hstack);

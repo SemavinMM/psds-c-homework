@@ -200,3 +200,63 @@ TEST(GetAllTests, SeveralStacks)
         EXPECT_EQ(stack_valid_handler(stacks[i]), 1);
     }
 }
+
+TEST(FreeAllTests, NoStacksExist)
+{
+    stack_free_all();
+
+    const hstack_t stack = stack_new();
+    ASSERT_EQ(stack_valid_handler(stack), 0);
+    stack_free(stack);
+    EXPECT_EQ(stack_valid_handler(stack), 1);
+}
+
+TEST(FreeAllTests, SeveralStacks)
+{
+    const size_t count = 10;
+    hstack_t stacks[count] = {-1};
+    for (size_t i = 0; i < count; ++i)
+    {
+        stacks[i] = stack_new();
+        ASSERT_EQ(stack_valid_handler(stacks[i]), 0);
+    }
+    const int data = 1;
+    for (size_t i = 0; i < count; ++i)
+    {
+        stack_push(stacks[i], &data, sizeof(data));
+        ASSERT_EQ(stack_size(stacks[i]), 1u);
+    }
+
+    stack_free_all();
+
+    for (size_t i = 0; i < count; ++i)
+    {
+        EXPECT_EQ(stack_valid_handler(stacks[i]), 1);
+        EXPECT_EQ(stack_size(stacks[i]), 0u);
+    }
+
+    const hstack_t fresh = stack_new();
+    ASSERT_EQ(stack_valid_handler(fresh), 0);
+    EXPECT_EQ(stack_size(fresh), 0u);
+    stack_free(fresh);
+    EXPECT_EQ(stack_valid_handler(fresh), 1);
+}
+
+TEST(FreeAllTests, SomeStacksAlreadyFreed)
+{
+    const size_t count = 5;
+    hstack_t stacks[count] = {-1};
+    for (size_t i = 0; i < count; ++i)
+    {
+        stacks[i] = stack_new();
+        ASSERT_EQ(stack_valid_handler(stacks[i]), 0);
+    }
+    stack_free(stacks[0]);
+
+    stack_free_all();
+
+    for (size_t i = 0; i < count; ++i)
+    {
+        EXPECT_EQ(stack_valid_handler(stacks[i]), 1);
+    }
+}

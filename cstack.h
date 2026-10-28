@@ -10,6 +10,9 @@ hstack_t stack_new(void);
 /* Remove the stack by handler, if it exists. */
 void stack_free(const hstack_t stack);
 
+/* Remove all existing stacks, if any. */
+void stack_free_all(void);
+
 /* Check handler validity; returns 0 if the stack exists, 1 otherwise. */
 int stack_valid_handler(const hstack_t stack);
 
