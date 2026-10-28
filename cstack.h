@@ -10,6 +10,9 @@ hstack_t stack_new(void);
 /* Remove the stack by handler, if it exists. */
 void stack_free(const hstack_t stack);
 
+/* Remove all existing stacks, if any. */
+void stack_free_all(void);
+
 /* Check handler validity; returns 0 if the stack exists, 1 otherwise. */
 int stack_valid_handler(const hstack_t stack);
 
@@ -23,6 +26,10 @@ stack_push(const hstack_t stack, const void* data_in, const unsigned int size);
 /* Pop a data element into a buffer; returns written bytes or 0 on failure. */
 unsigned int
 stack_pop(const hstack_t stack, void* data_out, const unsigned int size);
+
+/* Get the size in bytes of the top element; returns 0 if the stack
+ * does not exist or is empty. */
+unsigned stack_top_size(const hstack_t stack);
 
 /* Create a new stack filled with handlers of all other stacks;
  * returns its handler or -1 on error, leaving existing stacks unchanged. */

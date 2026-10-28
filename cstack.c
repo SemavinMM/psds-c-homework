@@ -14,6 +14,8 @@ void stack_free(const hstack_t hstack)
     UNUSED(hstack);
 }
 
+void stack_free_all(void) {}
+
 int stack_valid_handler(const hstack_t hstack)
 {
     UNUSED(hstack);
@@ -40,6 +42,12 @@ stack_pop(const hstack_t hstack, void* data_out, const unsigned int size)
     UNUSED(hstack);
     UNUSED(data_out);
     UNUSED(size);
+    return 0;
+}
+
+unsigned stack_top_size(const hstack_t hstack)
+{
+    UNUSED(hstack);
     return 0;
 }
 
