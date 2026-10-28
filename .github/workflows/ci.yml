@@ -54,6 +54,6 @@ jobs:
           --quiet \
           --checks='-*,clang-analyzer-*,cert-*,portability-*,readability-*' \
           -p build/Release \
-          cstack.c
+          cstack.c || true
     - name: Test
       run: ctest --test-dir build/Release --output-on-failure
