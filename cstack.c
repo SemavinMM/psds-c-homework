@@ -19,7 +19,7 @@ void stack_free_all(void) {}
 int stack_valid_handler(const hstack_t hstack)
 {
     UNUSED(hstack);
-    return 1;
+    return 0;
 }
 
 unsigned int stack_size(const hstack_t hstack)
