@@ -18,6 +18,7 @@ TEST_P(AllAPITest, InvalidStackHandlers)
     stack_free(handler);
     EXPECT_EQ(stack_valid_handler(handler), 1);
     EXPECT_EQ(stack_size(handler), 0u);
+    EXPECT_EQ(stack_top_size(handler), 0u);
     const int data_in = 1;
     stack_push(handler, &data_in, sizeof(data_in));
     int data_out = 0;
@@ -107,6 +108,46 @@ TEST_F(ModifyTests, PopFromEmptyStack)
     ASSERT_EQ(stack_size(stack), 0u);
     int data_out = 0;
     EXPECT_EQ(stack_pop(stack, &data_out, sizeof(data_out)), 0u);
+}
+
+TEST_F(ModifyTests, TopSizeEmptyStack)
+{
+    ASSERT_EQ(stack_size(stack), 0u);
+    EXPECT_EQ(stack_top_size(stack), 0u);
+}
+
+TEST_F(ModifyTests, TopSizeSinglePushPop)
+{
+    EXPECT_EQ(stack_top_size(stack), 0u);
+
+    const int data_in[3] = {0, 1, 2};
+    stack_push(stack, data_in, sizeof(data_in));
+    ASSERT_EQ(stack_size(stack), 1u);
+    EXPECT_EQ(stack_top_size(stack), sizeof(data_in));
+
+    int data_out[3] = {0};
+    EXPECT_EQ(stack_pop(stack, data_out, sizeof(data_out)), sizeof(data_out));
+    EXPECT_EQ(stack_size(stack), 0u);
+    EXPECT_EQ(stack_top_size(stack), 0u);
+}
+
+TEST_F(ModifyTests, TopSizeSeveralPushPop)
+{
+    const size_t count = 3;
+    const unsigned int sizes[count] = {1u, 4u, 8u};
+    unsigned char data_in[8] = {0};
+    unsigned char data_out[8] = {0};
+    for (size_t i = 0; i < count; ++i)
+    {
+        stack_push(stack, data_in, sizes[i]);
+        EXPECT_EQ(stack_top_size(stack), sizes[i]);
+    }
+    for (size_t i = count; i > 0; --i)
+    {
+        ASSERT_EQ(stack_pop(stack, data_out, sizes[i - 1]), sizes[i - 1]);
+        EXPECT_EQ(stack_top_size(stack), i > 1 ? sizes[i - 2] : 0u);
+    }
+    EXPECT_EQ(stack_size(stack), 0u);
 }
 
 TEST_F(ModifyTests, SinglePushPop)

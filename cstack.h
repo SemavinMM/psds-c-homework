@@ -27,6 +27,10 @@ stack_push(const hstack_t stack, const void* data_in, const unsigned int size);
 unsigned int
 stack_pop(const hstack_t stack, void* data_out, const unsigned int size);
 
+/* Get the size in bytes of the top element; returns 0 if the stack
+ * does not exist or is empty. */
+unsigned stack_top_size(const hstack_t stack);
+
 /* Create a new stack filled with handlers of all other stacks;
  * returns its handler or -1 on error, leaving existing stacks unchanged. */
 hstack_t stack_get_all(void);
