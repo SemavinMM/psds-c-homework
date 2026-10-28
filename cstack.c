@@ -42,3 +42,8 @@ stack_pop(const hstack_t hstack, void* data_out, const unsigned int size)
     UNUSED(size);
     return 0;
 }
+
+hstack_t stack_get_all(void)
+{
+    return -1;
+}
