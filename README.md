@@ -5,31 +5,31 @@
 ## Краткое описание
 
 Проект предназначен для тривиальной реализации структуры данных
-[стек](https://github.com/czertyaka/prosoft-c-stack/blob/master/docs/stack.md)
+[стек](./docs/stack.md)
 в учебных целях.
 
 В проект включена статическая библиотека `cstack`, написанная на C и реализующая структуру данных.
 Для библиотеки определен интерфейс (API) в виде набора прототипов функций в файле
-[cstack.h](https://github.com/czertyaka/prosoft-c-stack/blob/master/cstack.h).
-В файле [cstack.c](https://github.com/czertyaka/prosoft-c-stack/blob/master/cstack.c)
+[cstack.h](./cstack.h).
+В файле [cstack.c](./cstack.c)
 содержатся пустые определения этих функций.
 Вам необходимо дополнить эти определения таким образом, чтобы библиотека удовлетворяла требованиям
-[технического задания](https://github.com/czertyaka/prosoft-c-stack/blob/master/docs/technical-requirement.md).
+[технического задания](./docs/technical-requirement.md).
 
 В проекте используется система сборки [cmake](https://cmake.org/).
 Это одна из самых популярных систем сборки для проектов на C/C++.
 Поддержка `cmake` имеется во многих популярных IDE (Visual Studio, QtCreator и др.).
 Сборка проекта описана в файле
-[CMakeLists.txt](https://github.com/czertyaka/prosoft-c-stack/blob/master/CMakeLists.txt).
+[CMakeLists.txt](./CMakeLists.txt).
 Порядок сборки проекта с примерами в разных средах разработки описан в
-[этом разделе](https://github.com/czertyaka/prosoft-c-stack/blob/master/docs/build.md).
+[этом разделе](./docs/build.md).
 Подробнее о системах сборки
 [тут](https://habr.com/ru/articles/155201/)
 и [тут](https://habr.com/ru/articles/155467/)
 (порядок важен).
 
 Имеется возможность (по-умолчанию отключена) собрать исполняемый файл для ее тестирования
-([test.cpp](https://github.com/czertyaka/prosoft-c-stack/blob/master/test.cpp)).
+([test.cpp](./test.cpp)).
 Для включения теста в сборку проекта необходимо сконфигурировать `cmake` с включенной опцией `WITH_TEST`.
 Код теста написан на C++, используется библиотека [GoogleTest](https://github.com/google/googletest).
 Тест будет собран с использованием
@@ -45,6 +45,7 @@
 
 * Компилятор C/С++ (`gcc`, `clang`, `msvc` и др.).
 * `cmake >= 3.22` — генератор скриптов сборки make/Ninja/etc.
+* `clang-format >= 19.1.7` — утилита автоформатирования.
 * GoogleTest (опционально) — библиотека для написания модульных тестов.
 
 Понадобится также система сборки (make/Ninja/etc) по выбору.
