@@ -61,7 +61,7 @@ IDE, и по-моему, всё получилось.
     pacman -S base-devel gtest gmock
     ```
     Я предпочитаю пользоваться пакетным менеджером [conan](https://conan.io/), для которого в репозитории я
-    подготовил файл [conanfile.txt](https://github.com/czertyaka/prosoft-c-stack/blob/master/conanfile.txt).
+    подготовил файл [conanfile.txt](../conanfile.txt).
     Если у вас есть этот инструмент и вы с ним знакомы, установить googletest можно с помощью команды:
     ```sh
     conan install . --build=missing
