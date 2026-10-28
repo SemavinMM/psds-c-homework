@@ -152,10 +152,32 @@ struct stack_entries_table g_table = {0u, NULL};
     ![Screenshot from 2023-11-19 21-10-28](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/c0c24f41-64cb-4c47-a883-63c150712a84)
     ![Screenshot from 2023-11-19 21-14-07](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/517553c2-a696-4644-ac25-c6ba39f6607c)
     ![image](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/b04466b9-858e-44ee-a08a-4d1f086bd0c3)
-    [Включите](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository)
-    GitHub Actions для вашего форка.
+    Теперь включите GitHub Actions для вашего форка. Обратите внимание: ваш форк — приватный репозиторий,
+    и в новых приватных репозиториях автоматические сборки (workflow'ы GitHub Actions) по умолчанию
+    могут быть отключены. Пока GitHub Actions выключены, в ответ на ваши пуш и пулл-реквесты не запустится
+    ни сборка, ни юнит-тесты, ни проверка стиля.
+
+    Официальная документация GitHub о том, как управлять настройками GitHub Actions для репозитория,
+    приведена в [Managing GitHub Actions settings for a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository).
+
+    Чтобы включить GitHub Actions, откройте страницу вашего форка и под его именем перейдите в **Settings**.
+    В левом боковом меню выберите раздел **Actions**, а в открывшемся подменю — **General**.
+    Если GitHub Actions в вашем репозитории отключены, на вкладке **Actions** будет показано соответствующее
+    уведомление и кнопка **Enable Actions on this repository** — нажмите её, чтобы разрешить запуск
+    workflow'ов в этом репозитории.
+
+    В блоке **Actions permissions** на странице **General** укажите, какими разрешениями workflow'ы смогут
+    пользоваться (например, *Read and write repository permissions*), и нажмите кнопку **Save** в правом
+    нижнем углу страницы. Там же для приватных репозиториев есть дополнительные настройки в блоке
+    **Fork pull request workflows** (запуск workflow'ов из пулл-реквестов внешних форков, требование их
+    одобрения и т.д.) — для выполнения домашней работы достаточно значений по умолчанию.
+
+    Убедитесь, что GitHub Actions действительно включены: на вкладке **Actions** вашего репозитория
+    должна отображаться информация о доступных workflow'ах. В этой домашней работе workflow
+    [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) запускается по событию `pull_request`,
+    поэтому первый запуск появится в списке, как только вы создадите пулл-реквест.
 4. Склонируйте репозиторий на ваш компьютер. Создайте ветку в вашем репозитории с названием, отличным от `master`.
-В командной строке Linux или GitBash на Windows это можно сделать следующим образом:
+    В командной строке Linux или GitBash на Windows это можно сделать следующим образом:
     ![Screenshot from 2023-11-19 21-19-17](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/968f62e9-7b54-4a98-b937-26a92edec962)
     ```sh
     git clone <ссылка из буфера обмена>
