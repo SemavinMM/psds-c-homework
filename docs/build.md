@@ -35,19 +35,19 @@ IDE, и по-моему, всё получилось.
 2. Выполнить конфигурацию `cmake` в директории `build/Release`, которая создастся автоматически:
     ```sh
     cmake -B build/Release
-    ```  
+    ```
 3. Собрать проект без распараллеливания или с распараллеливанием:
     ```sh
     cmake --build build/Release
     cmake --build build/Release -j $(nproc)
     ```
 
-### Сборка теста (необязательно)
+### Сборка и запуск теста (необязательно)
 
 1. Установить фреймворк [googletest](https://github.com/google/googletest),
     библиотеку адрес-санитайзера и библиотеку санитайзера UB любым известным способом
     (собрать из исходников, скачать с помощью пакетного менеджера системы).
-    
+
     Для Debian репозиториев:
     ```sh
     sudo apt install build-essential libgtest-dev libgmock-dev
@@ -118,11 +118,6 @@ clang-format -i cstack.*
 3. Для более подробного изучения результатов тестов, откройте ``Test Explorer``.
     ![image](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/510ee7ba-928c-4d51-a8ea-e38fc71e2087)
 
-
-
-
-
-
 ## QtCreator
 
 ### Сборка библиотеки
@@ -136,7 +131,6 @@ clang-format -i cstack.*
 4. Для сборки нажмите на символ молотка в нижнем левом углу или нажмите \<Ctrl-B\>.
     ![Screenshot from 2023-11-19 23-41-08](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/d448a90e-b720-46bf-bd84-7e0d7217a1b8)
 
-
 ### Сборка теста (необязательно)
 
 1. Зайдите в ``Projects``:
@@ -147,6 +141,3 @@ clang-format -i cstack.*
 4. Запустите тесты ``Tools``->``Tests``->``Run All Tests``:
     ![image](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/71d2004d-4da1-4360-98b3-2eafb8038737)
     ![image](https://github.com/czertyaka/prosoft-c-stack/assets/69390349/c18b07c9-0b9b-4e00-a0e6-951588776134)
-
-
-
