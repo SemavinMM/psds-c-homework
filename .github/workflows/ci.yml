@@ -5,6 +5,16 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
+  format:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install clang-format
+      run: pip install "clang-format==19.1.7"
+    - name: Clang-format
+      run: clang-format --dry-run -Werror cstack.c
+
   build:
     runs-on: ubuntu-24.04
 

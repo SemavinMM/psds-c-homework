@@ -1,5 +1,7 @@
+#include <algorithm>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <vector>
 
 extern "C"
 {
@@ -137,4 +139,64 @@ TEST_F(ModifyTests, SeveralPushPop)
         EXPECT_EQ(stack_size(stack), size - 1u - i);
     }
     EXPECT_THAT(data_out, ::testing::ElementsAre(2, 1, 0));
+}
+
+TEST(GetAllTests, NoOtherStacks)
+{
+    const hstack_t all = stack_get_all();
+    ASSERT_EQ(stack_valid_handler(all), 0);
+    EXPECT_EQ(stack_size(all), 0u);
+
+    int data_out = 0;
+    EXPECT_EQ(stack_pop(all, &data_out, sizeof(data_out)), 0u);
+    EXPECT_EQ(data_out, 0);
+
+    stack_free(all);
+    EXPECT_EQ(stack_valid_handler(all), 1);
+}
+
+TEST(GetAllTests, SeveralStacks)
+{
+    const size_t count = 5;
+    hstack_t stacks[count] = {-1};
+    for (size_t i = 0; i < count; ++i)
+    {
+        stacks[i] = stack_new();
+        ASSERT_EQ(stack_valid_handler(stacks[i]), 0);
+        for (size_t j = 0; j < i; ++j)
+        {
+            ASSERT_NE(stacks[i], stacks[j]);
+        }
+    }
+
+    const hstack_t all = stack_get_all();
+    ASSERT_EQ(stack_valid_handler(all), 0);
+    for (size_t i = 0; i < count; ++i)
+    {
+        ASSERT_NE(all, stacks[i]);
+    }
+    ASSERT_EQ(stack_size(all), count);
+
+    std::vector<hstack_t> descriptors;
+    hstack_t data_out = 0;
+    while (stack_pop(all, &data_out, sizeof(data_out)) == sizeof(data_out))
+    {
+        EXPECT_NE(data_out, all);
+        EXPECT_EQ(stack_valid_handler(data_out), 0);
+        descriptors.push_back(data_out);
+    }
+    EXPECT_EQ(stack_size(all), 0u);
+
+    std::vector<hstack_t> expected(stacks, stacks + count);
+    std::sort(descriptors.begin(), descriptors.end());
+    std::sort(expected.begin(), expected.end());
+    EXPECT_EQ(descriptors, expected);
+
+    stack_free(all);
+    EXPECT_EQ(stack_valid_handler(all), 1);
+    for (size_t i = 0; i < count; ++i)
+    {
+        stack_free(stacks[i]);
+        EXPECT_EQ(stack_valid_handler(stacks[i]), 1);
+    }
 }
